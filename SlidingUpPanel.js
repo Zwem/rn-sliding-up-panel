@@ -35,7 +35,8 @@ class SlidingUpPanel extends React.Component {
     contentStyle: PropTypes.any,
     children: PropTypes.oneOfType([PropTypes.element, PropTypes.func]),
     renderDraggableHeader: PropTypes.func,
-    defaultYPosition: PropTypes.number
+    defaultYPosition: PropTypes.number,
+    containerStyle: PropTypes.any
   }
 
   static defaultProps = {
@@ -282,7 +283,8 @@ class SlidingUpPanel extends React.Component {
 
   _renderContent() {
     const {top, bottom} = this.props.draggableRange
-    const height = this.props.height
+    const height = this.props.height;
+    const containerStyle = this.props.containerStyle;
 
     const translateY = this._translateYAnimation.interpolate({
       inputRange: [-top, -bottom],
@@ -295,6 +297,7 @@ class SlidingUpPanel extends React.Component {
     const animatedContainerStyles = [
       styles.animatedContainer,
       transform,
+      containerStyle,
       {height, top: visibleHeight, bottom: 0}
     ]
 
